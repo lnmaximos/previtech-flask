@@ -165,6 +165,8 @@ def get_user_clients():
         """)
         result = session.execute(query, {"id_usuario": id_usuario}).fetchall()
 
+        session.commit()
+
         # Utiliza o Pandas para converter os resultados para um DataFrame
         df = pd.DataFrame(result)
 
