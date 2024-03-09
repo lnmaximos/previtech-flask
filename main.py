@@ -97,9 +97,9 @@ def predict_and_insert_data_to_sql(session, data_frame, one_hot_encoder, tree_mo
 
         session.execute(
             text("""
-                INSERT INTO new_clients (credit_score, geography, gender, age, ternure, balance,
+                INSERT INTO new_clients (credit_score, geography, gender, age, tenure, balance,
                                         num_of_products, has_credit_card, active_member, estimated_salary, churn, id_user)
-                VALUES (:credit_score, :geography, :gender, :age, :ternure, :balance,
+                VALUES (:credit_score, :geography, :gender, :age, :tenure, :balance,
                         :num_of_products, :has_credit_card, :active_member, :estimated_salary, :churn, :id_user)
             """),
             {**original_data.iloc[0].to_dict(), 'id_user': id_user}
