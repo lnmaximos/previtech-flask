@@ -27,6 +27,7 @@ db_host = os.environ.get("DB_HOST")
 db_name = os.environ.get("DB_NAME")
 db_path = f"postgresql+psycopg2://{db_user}:{db_password}@{db_host}/{db_name}"
 engine = create_engine(db_path, echo=False)
+Session = sessionmaker(bind=engine)
     
 class User(declarative_base()):
     __tablename__ = 'users'
@@ -137,7 +138,7 @@ def check_token():
 
 @contextmanager
 def get_session():
-    session = sessionmaker(bind=engine)
+    session = Session()
     try:
         yield session
         session.commit()
